@@ -1,0 +1,85 @@
+﻿@model CMS.Models.signupModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Create User</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+@*_______________ Form ______________*@
+<div class="row g-4" style="height:400px">
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" type="text" class="form-control" id="floatingName" placeholder="Enter Name">
+                    <label for="floatingName">Name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" type="text" class="form-control" id="floatingEmail" placeholder="Enter UserName / Email">
+                    <label for="floatingEmail">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Password" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
+                    <label for="floatingPass">Password</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="ConPassword" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
+                    <label for="floatingPass">ConPassword</label>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    @*_______________ Images ______________*@
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <label class="control-label">User Image</label>
+
+            <input asp-for="iImage" />
+
+            <div class="h-100 d-flex justify-content-center align-content-center align-items-center">
+                <img src="" class="preview" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

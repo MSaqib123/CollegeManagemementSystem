@@ -1,0 +1,117 @@
+﻿@model TblCourse
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Create Course</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+<div class="row g-4">
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded p-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CId" />
+                <input asp-for="CCreatedate" hidden />
+                <input asp-for="coImage" hidden />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Course" type="text" class="form-control" id="floatingCourse"
+                           placeholder="Enter Departmenet">
+                    <label for="floatingCourse">Course</label>
+                    <span asp-validation-for="Course" class="text-danger"></span>
+                </div>
+
+
+                @*______________ Departement _____________*@
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+                        <div class="form-floating mb-3" style="width:100%">
+                            <select asp-for="DepId" asp-items="@ViewBag.dep" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected>Open this select menu</option>
+                            </select>
+                            <label for="floatingSelect">Select Departmeet</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <textarea asp-for="courseDesc" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Course Description</label>
+                </div>
+
+                @*_____ Main Image ______*@
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Select Main Image</label>
+                    <input asp-for="BrowsImage" class="form-control bg-dark" type="file" id="formFile">
+                </div>
+
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @*_______________ Images ______________*@
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="form-group">
+                <label>Main Image of Facility</label>
+                <div class="container mt-3">
+                    @if (Model.coImage != null)
+                    {
+                        <img src="~/@Model.coImage" class="img-fluid" id="facilityPreview" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("facilityPreview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>

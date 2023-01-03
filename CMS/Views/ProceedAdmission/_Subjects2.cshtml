@@ -1,0 +1,7 @@
+﻿@foreach (var item in ViewBag.OptinalSubjects)
+{
+        <div class="form-check form-check-inline ml-3">
+            <input class="form-check-input subjectSelect" type="checkbox" value="@item.Value">
+            <label class="form-check-label" for="inlineCheckbox1">@item.Text</label>
+        </div>
+    }

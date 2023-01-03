@@ -1,0 +1,70 @@
+﻿@model TblYear
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Edit Years</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+<div class="row g-4">
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded p-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="YId" />
+                <div class="form-floating mb-3">
+                    <input asp-for="Year" type="text" class="form-control" id="floatingDep"
+                           placeholder="Enter Departmenet">
+                    <label for="floatingDep">Create Years</label>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    @*_______________ Images ______________*@
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+
+            <div class="form-group">
+                @*<label>Main Image of Facility</label>*@
+                <div class="container mt-3">
+                    @*<img src="~/@Model.depImage" class="img-fluid" id="facilityPreview" />*@
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

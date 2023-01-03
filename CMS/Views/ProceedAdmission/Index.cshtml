@@ -1,0 +1,188 @@
+﻿@model CMS.Models.TblStudent
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Check Admission</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Admission</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Check Registration</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<div class="container">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">Registration</h6>
+        <h1 class="mb-5">Check Registration Form</h1>
+    </div>
+</div>
+
+
+
+<!-- Contact Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+
+        @*________________ Check Time ___________*@
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="0.2s">
+                <h5>Check Admission Request</h5>
+                <p class="mb-4">
+                    Enter Your StudentId which was give after Submiting Registration Form.<br />
+                    If you are Not Registrat then register you selef by clicking here <a asp-action="Create" asp-controller="Admission" asp-area="">Register Here</a>.
+                </p>
+            </div>
+
+            <div class="col-lg-8 col-md-6 wow fadeInRight" data-wow-delay="0.2s">
+                <form asp-action="Index" method="post">
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input type="number" name="studentId" class="form-control" id="name" placeholder="Enter Studnet Number">
+                                <label for="name">Enter Studnet Number</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Check</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        @*________________ Result Time ___________*@
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                @if (Model != null)
+                {
+                    if (Model.StuId > 0)
+                    {
+                        <table class="table wow fadeInDown" style="margin-top:200px" data-wow-delay="0.2s">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>
+                                        StudentId
+                                    </th>
+                                    <th>
+                                        StudentName
+                                    </th>
+                                    <th>
+                                        FatherName
+                                    </th>
+                                    <th>
+                                        MotherName
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    @if (Model.StatusId == 2)
+                                    {
+                                        <th>
+                                            Get Enrolment Number
+                                        </th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Model.StuId
+                                    </td>
+                                    <td>
+                                        @Model.StuName
+                                    </td>
+                                    <td>
+                                        @Model.StuFathername
+                                    </td>
+                                    <td>
+                                        @Model.StuMothername
+                                    </td>
+                                    <th>
+                                        @if (Model.StatusId == 2)
+                                        {
+                                            <p class="text-success">Accepted</p>
+                                        }
+                                        else if (Model.StatusId == 1)
+                                        {
+                                            <p class="text-danger">Panding</p>
+                                        }
+                                        else if (Model.StatusId == 4)
+                                        {
+                                            <p class="text-danger">Rejected</p>
+                                        }
+                                    </th>
+                                    @if (Model.StatusId == 2)
+                                    {
+                                        <th>
+                                            <a asp-action="Update" asp-route-id="@Model.StuId" asp- class="btn btn-primary">Procceed Here</a>
+                                        </th>
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    }
+                }
+                else
+                {
+                }
+
+                @*____________________________ Student_Record ________________________________*@
+                @if (ViewBag.NotFound != "")
+                {
+                    <h2 class="text-centerwow fadeInDown" style="margin-top:200px" data-wow-delay="0.2s">
+                        @ViewBag.NotFound
+                    </h2>
+                }
+                else
+                {
+
+                }
+
+                @*____________________________ Student Rejected ________________________________*@
+                @*@if (ViewBag.reject == "You succeseded to Registored check Your Portal...")
+                {
+                    <script>
+                        swal({
+                            title: "Your Form is Rejected?",
+                            text: "Resubmit Your Form",
+                            type: "error"
+                        })
+                    </script>
+                    
+                }*@
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Contact End -->
+
+
+
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

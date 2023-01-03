@@ -1,0 +1,107 @@
+﻿@model IEnumerable<TblStudent>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                <h4>Previouse Exame<br />only be view</h4>
+                <div>
+                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+<div class="row g-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                Student
+                            </th>
+                            <th>
+                                Enrolment
+                            </th>
+                            <th>
+                                University
+                            </th>
+                            <th>
+                                Center
+                            </th>
+                            <th>
+                                Field
+                            </th>
+                            <th>
+                                Stream
+                            </th>
+                            <th>
+                                TotalMarks
+                            </th>
+                            <th>
+                                ObtanMarks
+                            </th>
+                            <th>
+                                Grade
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            <tr>
+                                <td>
+                                    @item.Index
+                                </td>
+                                <td>
+                                    @item.Data.StuName
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.EnrolmentNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.University)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.Center)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.Field)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.Stream)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.MarksSecured)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.OutOfMarks)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.ClassObtained)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

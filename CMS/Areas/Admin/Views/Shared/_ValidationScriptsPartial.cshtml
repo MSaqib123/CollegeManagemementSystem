@@ -1,0 +1,65 @@
+﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<style>
+    @*.toast {
+        left: 50%;
+        position: fixed;
+        transform: translate(-50%, 0px);
+    }*@
+    #toast-container > .toast:before {
+        position: fixed;
+        font-family: FontAwesome;
+        font-size: 24px;
+        line-height: 18px;
+        float: left;
+        color: #FFF;
+        padding-right: 0.5em;
+        margin-top: 100px !important;
+        @*margin: auto 0.5em auto -1.5em;
+        *@
+    }  
+</style>
+
+<div class="mt-5"  style="margin-top:100px">
+    @if (TempData["success"] != null)
+    {
+        <script>
+            @*toastr.options = {
+                "debug": false,
+                "positionClass": "toast-top-full-width",
+                "onclick": null,
+                "fadeIn": 300,
+                "fadeOut": 1000,
+                "timeOut": 5000,
+                "extendedTimeOut": 1000
+            }*@
+            toastr.success('@TempData["success"]')
+        </script>
+    }
+</div>
+<div class="mt-5"  style="margin-top:100px">
+    @if (TempData["error"] != null)
+    {
+        <script>
+        toastr.error('@TempData["error"]')
+        </script>
+    }
+</div>
+<div class="mt-5"  style="margin-top:100px">
+    @if (TempData["warning"] != null)
+    {
+        <script>
+        toastr.warning('@TempData["warning"]')
+        </script>
+    }
+</div>
+
+<div class="mt-5"  style="margin-top:100px">
+    @if (TempData["info"] != null)
+    {
+        <script>
+        toastr.info('@TempData["info"]')
+        </script>
+    }
+ </div>

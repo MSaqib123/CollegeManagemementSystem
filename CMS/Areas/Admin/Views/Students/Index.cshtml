@@ -1,0 +1,129 @@
+﻿@model IEnumerable<TblStudent>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                <h4>Students</h4>
+                @*<div>
+                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="row g-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>CreatedId</th>
+                            <th>
+                                St_Id
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                F_Name
+                            </th>
+                            <th>
+                                M_Name
+                            </th>
+                            <th>
+                                DOB
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            <tr>
+                                <td>
+                                    @item.Index
+                                </td>
+                                <td>
+                                    <p class="overflow-hidden" style="width:70px !important; height: 20px !important;">
+                                        @Html.DisplayFor(modelItem => item.Data.userId)
+                                    </p>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuFathername)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuMothername)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuDateofBirth)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data.Course.Course)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.Data.StuPreviousExeme.PreId)
+                                </td>*@
+                                <td class="text-center">
+                                    @if (item.Data.StatusId == 1 || item.Data.StatusId == null)
+                                    {
+                                        <p class="badge badge-pill bg-warning ">@item.Data.Status.Status</p>
+                                    }
+                                    else if (item.Data.StatusId == 2)
+                                    {
+                                        <p class="badge badge-pill bg-info text-dark">@item.Data.Status.Status</p>
+                                    }
+                                    else if (item.Data.StatusId == 3)
+                                    {
+                                        <p class="badge badge-pill bg-success ">@item.Data.Status.Status</p>
+                                    }
+                                    else if (item.Data.StatusId == 4)
+                                    {
+                                        <p class="badge badge-pill bg-info bg-danger">@item.Data.Status.Status</p>
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                </td>
+                                <td width="15%">
+                                    <a asp-action="Edit" asp-route-id="@item.Data.StuId" class="btn "><i class="fa fa-edit"></i></a> |
+                                    <a asp-action="delete" asp-route-id="@item.Data.StuId" class="btn  " onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

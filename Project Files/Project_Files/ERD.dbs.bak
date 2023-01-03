@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="School Managmenet System" id="Project_270" database="MySql" >
+	<schema name="school managmenet system" >
+		<table name="tbl" />
+		<table name="tbl_" />
+		<table name="tbl_0" />
+		<table name="tbl_activities" >
+			<column name="act_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="stud_id" type="int" jt="4" mandatory="y" />
+			<column name="assign_id" type="int" jt="4" mandatory="y" />
+			<column name="timetable_id" type="int" jt="4" />
+			<index name="pk_tbl_activities_act_id" unique="PRIMARY_KEY" >
+				<column name="act_id" />
+			</index>
+			<index name="unq_tbl_activities_stud_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="stud_id" />
+			</index>
+			<index name="unq_tbl_activities_assign_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="assign_id" />
+			</index>
+			<index name="unq_tbl_activities_timetable_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="timetable_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_assignments" >
+			<column name="assi_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="assi_name" type="varchar" length="20" jt="12" />
+			<column name="assi_description" type="varchar" length="250" jt="12" mandatory="y" />
+			<column name="assi_startdate" type="date" jt="91" mandatory="y" >
+				<defo>CURRENT_DATE</defo>
+			</column>
+			<column name="assi_enddate" type="date" jt="91" />
+			<index name="pk_tbl_assignments_assi_id" unique="PRIMARY_KEY" >
+				<column name="assi_id" />
+			</index>
+			<fk name="fk_tbl_assignments_tbl_activities" to_schema="school managmenet system" to_table="tbl_activities" >
+				<fk_column name="assi_id" pk="assign_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_course" >
+			<column name="c_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="course" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="c_createddate" type="date" jt="91" mandatory="y" >
+				<defo>CURRENT_DATE</defo>
+			</column>
+			<column name="dep_id" type="int" jt="4" />
+			<index name="pk_tbl_course_c_id" unique="PRIMARY_KEY" >
+				<column name="c_id" />
+			</index>
+			<index name="unq_tbl_course_dep_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="dep_id" />
+			</index>
+			<fk name="fk_tbl_course_tbl_student" to_schema="school managmenet system" to_table="tbl_student" >
+				<fk_column name="c_id" pk="course_id" />
+			</fk>
+			<fk name="fk_tbl_course_tbl_specializesubject" to_schema="school managmenet system" to_table="tbl_specializesubject" >
+				<fk_column name="c_id" pk="ss_course_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_departement" >
+			<column name="dep_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="departement" type="varchar" length="30" jt="12" mandatory="y" />
+			<index name="pk_tbl_departement_dep_id" unique="PRIMARY_KEY" >
+				<column name="dep_id" />
+			</index>
+			<fk name="fk_tbl_departement_tbl_course" to_schema="school managmenet system" to_table="tbl_course" >
+				<fk_column name="dep_id" pk="dep_id" />
+			</fk>
+			<fk name="fk_tbl_departement_tbl_facilities" to_schema="school managmenet system" to_table="tbl_facilities" >
+				<fk_column name="dep_id" pk="dep_id" />
+			</fk>
+			<fk name="fk_tbl_departement_tbl_faculities" to_schema="school managmenet system" to_table="tbl_faclities" >
+				<fk_column name="dep_id" pk="dep_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_departemente" >
+			<column name="dep_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="dep_name" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="dep_description" type="varchar" length="250" jt="12" />
+			<index name="pk_tbl_1_dep_id" unique="PRIMARY_KEY" >
+				<column name="dep_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_enrolment" >
+			<column name="enr_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="stu_id" type="int" jt="4" mandatory="y" />
+			<column name="specializesubject_id" type="int" jt="4" mandatory="y" />
+			<column name="optionalsubject_id" type="int" jt="4" mandatory="y" />
+			<index name="pk_tbl_enrolment_enr_id" unique="PRIMARY_KEY" >
+				<column name="enr_id" />
+			</index>
+			<index name="unq_tbl_enrolment_stu_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="stu_id" />
+			</index>
+			<index name="unq_tbl_enrolment_optionalsubject_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="optionalsubject_id" />
+			</index>
+			<index name="unq_tbl_enrolment_specializesubject_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="specializesubject_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_facilities" >
+			<column name="f_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="facility" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="dep_id" type="int" jt="4" />
+			<index name="pk_tbl_facilities_f_id" unique="PRIMARY_KEY" >
+				<column name="f_id" />
+			</index>
+			<index name="unq_tbl_facilities_dep_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="dep_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_faclities" >
+			<column name="f_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="30" jt="12" />
+			<column name="dateofbirth" type="date" length="15" jt="91" mandatory="y" />
+			<column name="fac_image" type="varchar" length="250" jt="12" />
+			<column name="ageby_dob" type="date" jt="91" mandatory="y" />
+			<column name="dep_id" type="int" jt="4" mandatory="y" />
+			<index name="pk_tbl_faculities_f_id" unique="PRIMARY_KEY" >
+				<column name="f_id" />
+			</index>
+			<index name="unq_tbl_faculities_dep_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="dep_id" />
+			</index>
+			<fk name="fk_tbl_faclities_tbl_student_teacher" to_schema="school managmenet system" to_table="tbl_student_teacher" >
+				<fk_column name="f_id" pk="student_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_op_subjects" >
+			<column name="op_id" type="int" jt="4" mandatory="y" />
+			<column name="op_subjects" type="varchar" length="30" jt="12" />
+			<index name="pk_tbl_op_subjects_op_id" unique="PRIMARY_KEY" >
+				<column name="op_id" />
+			</index>
+			<fk name="fk_tbl_op_subjects_tbl_optionalsubjects" to_schema="school managmenet system" to_table="tbl_optionalsubjects" >
+				<fk_column name="op_id" pk="subject_1" />
+			</fk>
+			<fk name="fk_tbl_op_subjects_tbl_optionalsubjects_0" to_schema="school managmenet system" to_table="tbl_optionalsubjects" >
+				<fk_column name="op_id" pk="subject_2" />
+			</fk>
+			<fk name="fk_tbl_op_subjects_tbl_optionalsubjects_1" to_schema="school managmenet system" to_table="tbl_optionalsubjects" >
+				<fk_column name="op_id" pk="subject_3" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_optionalsubjects" >
+			<column name="os_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="year" type="int" jt="4" />
+			<column name="subject_1" type="int" jt="4" />
+			<column name="subject_2" type="int" jt="4" />
+			<column name="subject_3" type="int" jt="4" />
+			<index name="pk_tbl_optionalsubjects_os_id" unique="PRIMARY_KEY" >
+				<column name="os_id" />
+			</index>
+			<index name="unq_tbl_optionalsubjects_year" unique="UNIQUE_CONSTRAINT" >
+				<column name="year" />
+			</index>
+			<index name="unq_tbl_optionalsubjects_subject_1" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_1" />
+			</index>
+			<index name="unq_tbl_optionalsubjects_subject_2" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_2" />
+			</index>
+			<index name="unq_tbl_optionalsubjects_subject_3" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_3" />
+			</index>
+			<fk name="fk_tbl_optionalsubjects_tbl_enrolment" to_schema="school managmenet system" to_table="tbl_enrolment" >
+				<fk_column name="os_id" pk="optionalsubject_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_previousexamedetails" >
+			<column name="pre_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="univercity" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="enrolmentno" type="int" jt="4" mandatory="y" />
+			<column name="center" type="varchar" length="30" jt="12" mandatory="y" >
+				<defo>&#039;no center&#039;</defo>
+			</column>
+			<column name="stream" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="field" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="marks_secured" type="int" jt="4" mandatory="y" />
+			<column name="out_of_marks" type="int" jt="4" mandatory="y" />
+			<column name="class_obtained" type="varchar" length="30" jt="12" mandatory="y" />
+			<index name="pk_tbl_previousexamedetails_pre_id" unique="PRIMARY_KEY" >
+				<column name="pre_id" />
+			</index>
+			<fk name="fk_tbl_previousexamedetails_tbl_student" to_schema="school managmenet system" to_table="tbl_student" >
+				<fk_column name="pre_id" pk="stu_previouseexeme_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_registered_people" >
+			<column name="regp_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="regp_name" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="regp_departement_id" type="int" jt="4" mandatory="y" />
+			<index name="pk_tbl_registered_people_regp_id" unique="PRIMARY_KEY" >
+				<column name="regp_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_specializesubject" >
+			<column name="ss_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="ss_course_id" type="int" jt="4" mandatory="y" />
+			<column name="year_id" type="int" jt="4" mandatory="y" />
+			<column name="subject_1" type="int" jt="4" mandatory="y" />
+			<column name="subject_2" type="int" jt="4" mandatory="y" />
+			<column name="subject_3" type="int" jt="4" mandatory="y" />
+			<index name="pk_tbl_specializesubject_ss_id" unique="PRIMARY_KEY" >
+				<column name="ss_id" />
+			</index>
+			<index name="unq_tbl_specializesubject_ss_course_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="ss_course_id" />
+			</index>
+			<index name="unq_tbl_specializesubject_year_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="year_id" />
+			</index>
+			<index name="unq_tbl_specializesubject_subject_1" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_1" />
+			</index>
+			<index name="unq_tbl_specializesubject_subject_2" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_2" />
+			</index>
+			<index name="unq_tbl_specializesubject_subject_3" unique="UNIQUE_CONSTRAINT" >
+				<column name="subject_3" />
+			</index>
+			<fk name="fk_tbl_specializesubject_tbl_enrolment" to_schema="school managmenet system" to_table="tbl_enrolment" >
+				<fk_column name="ss_id" pk="specializesubject_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_status" >
+			<column name="sta_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="status" type="text" length="1" jt="-1" mandatory="y" />
+			<index name="pk_tbl_status_stu_id" unique="PRIMARY_KEY" >
+				<column name="sta_id" />
+			</index>
+			<fk name="fk_tbl_status_tbl_student" to_schema="school managmenet system" to_table="tbl_student" >
+				<fk_column name="sta_id" pk="st_statusid" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_student" >
+			<column name="stu_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="stu_name" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="stu_fathername" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="stu_mothername" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="stu_image" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="sut_dateofbirth" type="date" jt="91" mandatory="y" />
+			<column name="stu_parementaddres" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="stu_residentialaddress" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="course_id" type="int" jt="4" mandatory="y" />
+			<column name="stu_previouseexeme_id" type="int" jt="4" mandatory="y" />
+			<column name="st_statusid" type="int" length="1" jt="4" mandatory="y" />
+			<index name="pk_tbl_student_stu_id" unique="PRIMARY_KEY" >
+				<column name="stu_id" />
+			</index>
+			<index name="unq_tbl_student_course_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="course_id" />
+			</index>
+			<index name="unq_tbl_student_stu_previouseexeme_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="stu_previouseexeme_id" />
+			</index>
+			<index name="unq_tbl_student_st_statusid" unique="UNIQUE_CONSTRAINT" >
+				<column name="st_statusid" />
+			</index>
+			<fk name="fk_tbl_student_tbl_enrolment" to_schema="school managmenet system" to_table="tbl_enrolment" >
+				<fk_column name="stu_id" pk="stu_id" />
+			</fk>
+			<fk name="fk_tbl_student_tbl_activities" to_schema="school managmenet system" to_table="tbl_activities" >
+				<fk_column name="stu_id" pk="stud_id" />
+			</fk>
+			<fk name="fk_tbl_student_tbl_student_teacher" to_schema="school managmenet system" to_table="tbl_student_teacher" >
+				<fk_column name="stu_id" pk="teacher_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_student_teacher" >
+			<column name="s_t_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="student_id" type="int" length="100" jt="4" />
+			<column name="teacher_id" type="int" jt="4" />
+			<index name="pk_tbl_student_teacher_s_t_id" unique="PRIMARY_KEY" >
+				<column name="s_t_id" />
+			</index>
+			<index name="unq_tbl_student_teacher_student_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="student_id" />
+			</index>
+			<index name="unq_tbl_student_teacher_teacher_id" unique="UNIQUE_CONSTRAINT" >
+				<column name="teacher_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_subjects" >
+			<column name="sub_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="subject" type="varchar" length="15" jt="12" mandatory="y" />
+			<index name="pk_tbl_subjects_sub_id" unique="PRIMARY_KEY" >
+				<column name="sub_id" />
+			</index>
+			<fk name="fk_tbl_subjects_tbl_specializesubject" to_schema="school managmenet system" to_table="tbl_specializesubject" >
+				<fk_column name="sub_id" pk="subject_1" />
+			</fk>
+			<fk name="fk_tbl_subjects_tbl_specializesubject_0" to_schema="school managmenet system" to_table="tbl_specializesubject" >
+				<fk_column name="sub_id" pk="subject_2" />
+			</fk>
+			<fk name="fk_tbl_subjects_tbl_specializesubject_1" to_schema="school managmenet system" to_table="tbl_specializesubject" >
+				<fk_column name="sub_id" pk="subject_3" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_timetable" >
+			<column name="tt_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="tt_name" type="varchar" length="30" jt="12" />
+			<index name="pk_tbl_timetable_tt_id" unique="PRIMARY_KEY" >
+				<column name="tt_id" />
+			</index>
+			<fk name="fk_tbl_timetable_tbl_activities" to_schema="school managmenet system" to_table="tbl_activities" >
+				<fk_column name="tt_id" pk="timetable_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tbl_year" >
+			<column name="y_id" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="year" type="varchar" length="15" jt="12" mandatory="y" />
+			<index name="pk_tbl_year_y_id" unique="PRIMARY_KEY" >
+				<column name="y_id" />
+			</index>
+			<fk name="fk_tbl_year_tbl_specializesubject" to_schema="school managmenet system" to_table="tbl_specializesubject" >
+				<fk_column name="y_id" pk="year_id" />
+			</fk>
+			<fk name="fk_tbl_year_tbl_optionalsubjects" to_schema="school managmenet system" to_table="tbl_optionalsubjects" >
+				<fk_column name="y_id" pk="year" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<connector name="" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout_1aee" show_relation="columns" >
+		<entity schema="school managmenet system" name="tbl_activities" color="C1D8EE" x="1792" y="224" />
+		<entity schema="school managmenet system" name="tbl_assignments" color="C1D8EE" x="1728" y="384" />
+		<entity schema="school managmenet system" name="tbl_course" color="C1D8EE" x="800" y="400" />
+		<entity schema="school managmenet system" name="tbl_departement" color="C1D8EE" x="720" y="592" />
+		<entity schema="school managmenet system" name="tbl_enrolment" color="C1D8EE" x="1360" y="192" />
+		<entity schema="school managmenet system" name="tbl_facilities" color="C1D8EE" x="512" y="544" />
+		<entity schema="school managmenet system" name="tbl_faclities" color="EEC1C1" x="560" y="176" />
+		<entity schema="school managmenet system" name="tbl_op_subjects" color="C1D8EE" x="1616" y="624" />
+		<entity schema="school managmenet system" name="tbl_optionalsubjects" color="C1D8EE" x="1488" y="448" />
+		<entity schema="school managmenet system" name="tbl_previousexamedetails" color="C1D8EE" x="928" y="544" />
+		<entity schema="school managmenet system" name="tbl_specializesubject" color="C1D8EE" x="1216" y="448" />
+		<entity schema="school managmenet system" name="tbl_status" color="C1D8EE" x="1216" y="304" />
+		<entity schema="school managmenet system" name="tbl_student" color="EEC1C1" x="1024" y="192" />
+		<entity schema="school managmenet system" name="tbl_student_teacher" color="C1EEC7" x="768" y="240" />
+		<entity schema="school managmenet system" name="tbl_subjects" color="C1D8EE" x="1232" y="672" />
+		<entity schema="school managmenet system" name="tbl_timetable" color="C1D8EE" x="1888" y="368" />
+		<entity schema="school managmenet system" name="tbl_year" color="C1D8EE" x="1376" y="656" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[School Management System]]></comment>
+		</callout>
+	</layout>
+</project>

@@ -1,0 +1,68 @@
+﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@if (TempData["success"] != null)
+{
+    <script>
+        toastr.success('@TempData["success"]')
+    </script>
+}
+
+@if (TempData["info"] != null)
+{
+    <script>
+        toastr.info('@TempData["info"]')
+    </script>
+}
+@if (TempData["error"] != null)
+{
+    <script>
+        toastr.error('@TempData["error"]')
+    </script>
+}
+
+
+@*_____________ Sweet Alert __________*@
+@if (TempData["swalerror"] != null)
+{
+    <script>
+        swal({
+            title: '@TempData["swalerror"]',
+            text : '@TempData["swalText"]',
+            type: "error"
+        })
+    </script>
+}
+
+@if (TempData["swalsuccess"] != null)
+{
+    <script>
+        swal({
+            title: '@TempData["swalsuccess"]',
+            text : '@TempData["swalText"]',
+            type: "success"
+        })
+    </script>
+}
+
+@if (TempData["swalwarning"] != null)
+{
+    <script>
+        swal({
+            title: "Your Form is Rejected?",
+            type: "warning"
+        })
+    </script>
+}
+@if (TempData["swalinf"] != null)
+{
+    <script>
+        swal({
+            title: "Your Form is Rejected?",
+            text: "Resubmit Your Form",
+            type: "warning"
+        })
+    </script>
+}
+
+

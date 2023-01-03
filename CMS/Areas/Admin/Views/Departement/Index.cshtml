@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TblDepartement>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                <h4>Departements</h4>
+                <div>
+                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="row g-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">
+                                Deparatement
+                            </th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            <tr scope="row">
+                                <td>
+                                    @item.Index
+                                </td>
+                                <td>
+                                    @if (item.Data.depImage != null)
+                                    {
+                                        <img src="~/@item.Data.depImage" alt="Alternate Text" height="40px" width="40px" />
+                                    }
+                                </td>
+                                <td>
+                                    @item.Data.Departement
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Data.DepId" class="btn "><i class="fa fa-edit"></i></a> |
+                                    <a asp-action="delete" asp-route-id="@item.Data.DepId" class="btn  " onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

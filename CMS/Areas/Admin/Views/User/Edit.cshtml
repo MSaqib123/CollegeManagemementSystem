@@ -1,0 +1,90 @@
+﻿@model CMS.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Update User</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+@*_______________ Form ______________*@
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="row g-4" style="height:400px">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserName" />
+                <input type="hidden" asp-for="ProfileImage" />
+
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" type="text" class="form-control" id="floatingName" placeholder="Enter Name">
+                    <label for="floatingName">Name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" type="text" class="form-control" id="floatingEmail" placeholder="Enter UserName / Email">
+                    <label for="floatingEmail">Email</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Country" type="text" class="form-control" id="floatingEmail" placeholder="Enter Country">
+                    <label for="floatingEmail">Country</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="PasswordHash" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
+                    <label for="floatingPass">Password</label>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+        @*_______________ Images ______________*@
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <label class="control-label">Change User Image</label>
+                <input asp-for="iImage" class="form-control" />
+                <div class="h-100 d-flex justify-content-center align-content-center align-items-center">
+                    @if (Model.ProfileImage != null)
+                    {
+                        <img src="~/@Model.ProfileImage" style="width:300px;height:230px"/>
+                    }
+                    else
+                    {
+                        <h1>No Image</h1>
+                    }
+                </div>
+            </div>
+        </div>  
+    </div>
+</form>
+
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+

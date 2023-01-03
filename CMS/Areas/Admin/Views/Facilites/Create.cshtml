@@ -1,0 +1,126 @@
+﻿@model VM_Facilities_images
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Create Departements</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+
+@*_______________ Form ______________*@
+<div class="row g-4">
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                @*______________ Facility _____________*@
+                <div class="form-floating mb-3">
+                    <input asp-for="TblFacility.Facility" type="text" class="form-control" id="floatingFac" placeholder="Enter Facility">
+                    <label for="floatingFac">Facility</label>
+                </div>
+
+                @*______________ Departement _____________*@
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+
+                        <div class="form-floating mb-3" style="width:90%">
+                            <select asp-for="TblFacility.DepId" asp-items="@ViewBag.dep" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected>Open this select menu</option>
+                            </select>
+                            <label for="floatingSelect">Select Departmeet</label>
+                        </div>
+
+                        <div class="mt-2">
+                            <a class="btn btn-primary" asp-action="Create" asp-controller="Departement" asp-route-key="facility"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                @*______________ Description _____________*@
+                <div class="form-floating mb-3">
+                    <textarea asp-for="TblFacility.Description" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Comments</label>
+                </div>
+
+
+                @*_____ Main Image ______*@
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Select Main Image</label>
+                    <input asp-for="TblFacility.BrowsImage" class="form-control bg-dark" type="file" id="formFile">
+                </div>
+
+                @*_____ Multiple Images ______*@
+                <div class="mb-4">
+                    <label for="formFileMultiple" class="form-label">Select Multiple Images</label>
+                    <input asp-for="Images" class="form-control bg-dark" type="file" id="formFileMultiple" multiple>
+                </div>
+
+
+                @*______________ Button _____________*@
+                <div class="form-group text-center text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <br />
+
+            </form>
+        </div>
+    </div>
+
+
+    @*_______________ Images ______________*@
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+
+            <div class="form-group">
+                <label>Main Image of Facility</label>
+                <div class="container mt-3">
+                    <img class="img-fluid" id="facilityPreview" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("facilityPreview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>

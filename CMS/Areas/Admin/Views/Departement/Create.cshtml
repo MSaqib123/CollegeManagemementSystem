@@ -1,0 +1,114 @@
+﻿@model TblDepartement
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Create Departements</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+@*_______________ Form ______________*@
+<div class="row g-4">
+
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Departement" type="text" class="form-control" id="floatingDep"
+                           placeholder="Enter Departmenet">
+                    <label for="floatingDep">Departement</label>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <textarea asp-for="shortDescription" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Short Description</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea asp-for="longDescription" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Long Description</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Select Main Image</label>
+                    <input asp-for="BrowsImage" class="form-control bg-dark" type="file" id="formFile">
+                </div>
+
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    @*_______________ Images ______________*@
+    <div class="col-sm-12 col-xl-6">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="form-group">
+                <label>Main Image of Facility</label>
+                <div class="container mt-3">
+                    <img class="img-fluid" id="facilityPreview" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+
+            @if (ViewData["key"] != null)
+            {
+
+            }
+            else
+            {
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("facilityPreview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>

@@ -1,0 +1,317 @@
+﻿@model studnetEnrolmentViewModel
+@*@{
+        ViewData["Title"] = "Update_Student";
+    }*@
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Update Students</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+@*_______________ Form ______________*@
+<form asp-action="Edit" enctype="multipart/form-data">
+
+    <div class="row g-4">
+        @*_______________ Student Detail ______________*@
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+
+                @*_____________________ Hidden Status Hidden _____________*@
+                @* <input asp-for="StatusId" class="form-control" hidden/> *@
+                <input asp-for="StudentTable.StuId" hidden />
+                <input asp-for="StudentTable.CourseId" hidden />
+                <input asp-for="StudentTable.StuImage" hidden />
+
+
+                <input asp-for="StudentTable.StuPreviousExeme.EnrolmentNo" hidden />
+                
+
+
+                @*_____________________ Student Detail ____________________*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="StudentTable.StuName" type="text" class="form-control" id="floatingCourse"
+                           placeholder="Enter StudentName">
+                    <label for="floatingCourse">Student Name</label>
+                    <span asp-validation-for="StudentTable.StuName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="StudentTable.StuFathername" type="text" class="form-control" id="floatingCourse"
+                           placeholder="Enter FatherName">
+                    <label for="floatingCourse">Father Name</label>
+                    <span asp-validation-for="StudentTable.StuFathername" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="StudentTable.StuMothername" type="text" class="form-control" id="floatingCourse"
+                           placeholder="Enter MotherName">
+                    <label for="floatingCourse">Mother Name</label>
+                    <span asp-validation-for="StudentTable.StuFathername" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <input asp-for="StudentTable.StuDateofBirth" type="date" class="form-control" id="floatingCourse"
+                           placeholder="Enter FatherName">
+                    <label for="floatingCourse">Date Of Birth</label>
+                    <span asp-validation-for="StudentTable.StuFathername" class="text-danger"></span>
+                </div>
+
+
+
+                @*______________ Address 1 _____________*@
+                <div class="form-floating mb-3">
+                    <textarea asp-for="StudentTable.StuParementaddress" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Parement Address</label>
+                </div>
+
+                @*______________ Address 2 _____________*@
+                <div class="form-floating mb-3">
+                    <textarea asp-for="StudentTable.StuResidentialaddress" class="form-control" placeholder="Leave a comment here"
+                              id="floatingTextarea" style="height: 150px;"></textarea>
+                    <label for="floatingTextarea">Residential Address</label>
+                </div>
+
+
+                <h5 class="text-primary">Change Status</h5>
+                @*_________________ Status _________________*@
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+
+                        <div class="form-floating mb-3" style="width:100%">
+                            <select asp-for="StudentTable.StatusId" asp-items="@ViewBag.status" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected>--- select ---</option>
+                            </select>
+                            <label for="floatingSelect">Status</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+
+
+            </div>
+        </div>
+
+        @*_______________ Images ______________*@
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="form-group">
+                    <label>Student Image updated</label>
+                    <br />
+                    <br />
+                    @*_____ Main Image ______*@
+                    <div class="mb-3">
+                        <input asp-for="StudentTable.BrowsImage" class="form-control bg-dark" type="file" id="formFile">
+                    </div>
+                    <div class="container mt-5 d-flex justify-content-center align-items-center align-content-center">
+                        @if (Model.StudentTable.StuImage != "")
+                        {
+                            <img src="~/@Model.StudentTable.StuImage" class="img-fluid" id="Preview" style="width:50%;height:80%" />
+                        }
+                        else
+                        {
+                            <img src="~/Template/img/no-image-icon-23492.png" class="img-fluid" id="facilityPreview" style="width:50%;height:80%" />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row g-4">
+        <div class="col-sm-12">
+            <div class="bg-secondary rounded h-100 p-4">
+                @*_____________________ Profile Button __________________*@
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a class="btn btn-primary w-100" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View Last Exame Record</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-primary w-100" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2">Show Course Detail of Student</a>
+                    </div>
+                </div>
+
+                @*_____________________ Prevoues / Cousrse ____________________*@
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        @*_____________________ Previouse Exame____________________*@
+                        <div class="col-sm-12 col-xl-12 collapse multi-collapse" id="multiCollapseExample1">
+                            <br /><br />
+                            <h4 class="text-primary">Prevouese Exame Detail</h4>
+                            <table class="table">
+                                <thead class="text-white">
+                                    <tr>
+                                        <th>University</th>
+                                        <th>Enrolment</th>
+                                        <th>Center</th>
+                                        <th>Stream</th>
+                                        <th>Fields</th>
+                                        <th>Marks</th>
+                                        <th>OF_Marks</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="25%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.University" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.University" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="10%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.EnrolmentNo" class="form-control" type="number" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.EnrolmentNo" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.Center" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.Center" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="15%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.Stream" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.Stream" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.Field" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.Field" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="10%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.MarksSecured" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.MarksSecured" class="text-danger"></span>
+                                            </div>
+                                        </td>
+
+                                        <td width="10%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.OutOfMarks" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.OutOfMarks" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td width="10%">
+                                            <div class="form-group">
+                                                <input asp-for="StudentTable.StuPreviousExeme.ClassObtained" class="form-control" />
+                                                <span asp-validation-for="StudentTable.StuPreviousExeme.ClassObtained" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @*_____________________ Course ____________________*@
+                        <div class="col-sm-12 col-xl-12 collapse multi-collapse" id="multiCollapseExample2">
+                            <br /><br />
+                            <h4 class="text-primary">Course Detail</h4>
+                            <table class="table">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Course</th>
+                                        <th>YearbySubject</th>
+                                        <th>SpecializeSubjects</th>
+                                        <th>OptinalSubjects</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.EnrolmentTable != null && Model.subject_optional_list != null)
+                                    {
+                                        <tr>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                @if (Model.StudentTable.Course != null)
+                                                {
+                                                    @Model.StudentTable.Course.Course
+                                                }
+                                            </td>
+                                            <td>
+                                                <p>@Model.EnrolmentTable.Specializesubject.SsName</p>
+                                            </td>
+                                            <td>
+                                                @foreach (var item in Model.subject_sepecaliz_list.Where(x => x.SS_id == Model.EnrolmentTable.SpecializesubjectId).ToList())
+                                                {
+                                                    <span>@item.Subject &nbsp;</span>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @foreach (var item in Model.subject_optional_list.Where(x => x.YId == Model.EnrolmentTable.Specializesubject.tblSubjects.First().YId).ToList())
+                                                {
+                                                    <span>@item.OptinalSubject</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="text-center text-danger">
+                                            <td colspan="5">Course is Panding , Accept Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<br />
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("Preview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+
+
+</script>
+

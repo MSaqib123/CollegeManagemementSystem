@@ -1,0 +1,491 @@
+﻿@model CMS.Data.ViewModel.studnetEnrolmentViewModel
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">Procced More</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Admission</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Enrolment</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<div class="container">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">Enrolment</h6>
+        <h1 class="mb-5">Enrolment Form</h1>
+    </div>
+</div>
+
+
+
+<!-- Contact Start -->
+<div class="container-xxl pb-5 pt-2">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="container-fluid">
+
+                    <form asp-action="Update">
+
+
+                        @*______________________ Enrolment Record __________________*@
+                        <div id="accordion">
+                            <div class="accordion">
+
+                                @*__________ Student Record _______*@
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Student Personal Data
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+
+                                            @*______________________ Student Record __________________*@
+                                            <!-- #region Student_Record -->
+                                            @*_____________________ Student Detail ____________________*@
+                                            <h4 class="text-primary">Student Detail</h4>
+
+                                            <div class="row">
+                                                <input asp-for="StudentTable.StuId" hidden>
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuName" class="control-label"></label>
+                                                        <input asp-for="StudentTable.StuName" class="form-control" />
+                                                        <span asp-validation-for="StudentTable.StuName" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuFathername" class="control-label"></label>
+                                                        <input asp-for="StudentTable.StuFathername" class="form-control" />
+                                                        <span asp-validation-for="StudentTable.StuFathername" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuMothername" class="control-label"></label>
+                                                        <input asp-for="StudentTable.StuMothername" class="form-control" />
+                                                        <span asp-validation-for="StudentTable.StuMothername" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuImage" class="control-label"></label>
+                                                        <input asp-for="StudentTable.StuImage" class="form-control" />
+                                                        <span asp-validation-for="StudentTable.StuImage" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuDateofBirth" class="control-label"></label>
+                                                        <input asp-for="StudentTable.StuDateofBirth" class="form-control" />
+                                                        <span asp-validation-for="StudentTable.StuDateofBirth" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuParementaddress" class="control-label"></label>
+                                                        <textarea asp-for="StudentTable.StuParementaddress" class="form-control"></textarea>
+                                                        <span asp-validation-for="StudentTable.StuParementaddress" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="StudentTable.StuResidentialaddress" class="control-label"></label>
+                                                        <textarea asp-for="StudentTable.StuResidentialaddress" class="form-control"></textarea>
+                                                        <span asp-validation-for="StudentTable.StuResidentialaddress" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*_____________________ Prevoues ____________________*@
+                                            <div class="row">
+                                                <div class="col-md-12 overflow-hidden">
+                                                    <h4 class="text-primary">Prevouese Exame Detail</h4>
+                                                    <table class="table">
+                                                        <thead class="">
+                                                            <tr>
+                                                                @*<th>ID</th>*@
+                                                                <th>University</th>
+                                                                <th></th>
+                                                                <th>EnrolmentNumber</th>
+                                                                <th>Center</th>
+                                                                <th>Stream</th>
+                                                                <th>Fields</th>
+                                                                <th>MarksSecured</th>
+                                                                <th>OutOfMarks</th>
+                                                                <th>ClassObtained</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.University" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.University" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.EnrolmentNo" class="form-control" type="number" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.EnrolmentNo" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.Center" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.Center" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.Stream" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.Stream" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.Field" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.Field" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.MarksSecured" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.MarksSecured" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.OutOfMarks" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.OutOfMarks" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="form-group">
+                                                                        <input asp-for="StudentTable.StuPreviousExeme.ClassObtained" class="form-control" />
+                                                                        <span asp-validation-for="StudentTable.StuPreviousExeme.ClassObtained" class="text-danger"></span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <!-- #endregion -->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*__________ Add Enrolment _______*@
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+                                            Enrolment For Exames
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="accordion-body">
+
+                                            <h3>Enrolment Record</h3>
+
+                                            <div class="row">
+                                                <div class="col-8 mt-4">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label fw-bold">Select Course</label>
+                                                            <select asp-items="ViewBag.Course" asp-for="StudentTable.CourseId" class="form-control" id="selectCourse">
+                                                                <option selected value="0">--- Select Course ---</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <br />
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label fw-bold">Select Year</label>
+                                                            <select asp-items="ViewBag.Years" asp-for="EnrolmentTable.Optionalsubject.YId" class="form-control" id="selectYear">
+                                                                <option selected value="0">--- Select Class ---</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <br />
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label fw-bold" id="SSSubjectLabel">OverAll Specilized Subjects</label><br />
+
+                                                            <div id="selects" class="mt-2 ms-2">
+                                                                @*<partial name="_Subjects" />*@
+                                                            </div>
+                                                            @*@foreach (var item in ViewBag.Subjects)
+                                                                {
+                                                                    <div class="form-check form-check-inline ml-3">
+                                                                        <input class="form-check-input" type="checkbox" value="@item.Value">
+                                                                        <label class="form-check-label" for="inlineCheckbox1">@item.Text</label>
+                                                                    </div>
+                                                                }*@
+                                                        </div>
+                                                    </div>
+                                                    <br />
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label fw-bold" id="OSLable">OverAll Optional Subjects</label><br />
+                                                            @*@foreach (var item in ViewBag.OptinalSubjects)
+                                                                {
+                                                                    <div class="form-check form-check-inline ml-3">
+                                                                        <input class="form-check-input" type="checkbox" value="@item.Value">
+                                                                        <label class="form-check-label" for="inlineCheckbox1">@item.Text</label>
+                                                                    </div>
+                                                                }*@
+
+                                                            <div id="selects2" class="mt-2 ms-2">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <br /><br />
+                        <input type="submit" class="btn btn-primary w-100" value="Submit Enrolment" />
+
+                        <div>
+                            <br />
+                            <br />
+                            <br />
+                            <a asp-action="Index" class="btn btn-primary">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+
+        //#region _______________ 1. Select_Subject_by_Course _______________
+        $('#selectCourse').change(function ()
+        {
+            @*alert($(this).children('option:selected').val());*@
+            var selectedCourseId = $(this).children('option:selected').val();
+            var selectedYearId = $("#selectYear").val();
+
+            $.ajax({
+                url: '/ProceedAdmission/SetCoursePost/',
+                type: "Post",
+                data: { selectedCourseId },
+                success: function (result, status, jqXHR) {
+                    $("#selects").html(result);
+                    if (selectedCourseId >0) {
+                        $("#SSSubjectLabel").text("Your Selected Specilized Subject");
+                        if (selectedYearId != 0) {
+                            $(".subjectSelect").attr("checked", "checked");
+                            $(".subjectSelect").attr("disabled", "disabled");
+                        }
+                    }
+                    else {
+                        $('#selectYear').val(0);
+                        $("#SSSubjectLabel").text("OverAll Specilize Subject");
+                        $("#OSLable").text("OverAll Specialize Subject");
+
+                        $("#selects").load('/ProceedAdmission/SetSubjects/');
+                        $("#selects2").load('/ProceedAdmission/SetOPSubjects/');
+                    }
+                },
+                error: function (jqXHR, status, err) {
+                    alert("Error");
+                },
+                complete: function (jqXHR, status) {
+                    //What to do here so only the #slctSubCats gets loaded?
+                }
+            });
+        });
+
+        //___ Post on Select ___
+        $('#selectYear').change(function () {
+            @* alert($(this).children('option:selected').val());*@
+            var selectedCourseId = $('#selectCourse').val();
+            @* alert("value of Coruse " + coursevaleu);*@
+            if (selectedCourseId > 0) {
+                var selectedYearId = $(this).children('option:selected').val();
+
+                //__________ select Specialize Subject _________
+                $.ajax({
+                    url: '/ProceedAdmission/SetSubjectsPost/',
+                    type: "Post",
+                    data: {
+                        selectedYearId,
+                        selectedCourseId,
+                    },
+                    success: function (result, status, jqXHR) {
+                        if (selectedYearId > 0) {
+                            $("#SSSubjectLabel").text("Your Selected Specialize Subject");
+
+                            $("#selects").html(result);
+                            $(".subjectSelect").attr("checked", "checked");
+                            $(".subjectSelect").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("#OSLable").text("OverAll Specialize Subject");
+                        }
+                    },
+                    error: function (jqXHR, status, err) {
+                        alert("Error");
+                    },
+                    complete: function (jqXHR, status) {
+                        //What to do here so only the #slctSubCats gets loaded?
+                    }
+                });
+
+                //__________ select Optional Subject _________
+                $.ajax({
+                    url: '/ProceedAdmission/SetYearPost_SSsubject/',
+                    type: "Post",
+                    data: {
+                        selectedYearId,
+                    },
+                    success: function (result, status, jqXHR) {
+                        if (selectedYearId > 0) {
+                            $("#OSLable").text("Your Selected Optional Subject");
+
+                            $("#selects2").html(result);
+                            $(".subjectSelect").attr("checked", "checked");
+                            $(".subjectSelect").attr("disabled", "disabled");
+                        }
+                        else {
+                            $("#SSSubjectLabel").text("OverAll Specilize Subject");
+                            $("#OSLable").text("OverAll Specialize Subject");
+
+                            $("#selects").load('/ProceedAdmission/SetSubjects/');
+                            $("#selects2").load('/ProceedAdmission/SetOPSubjects/');
+
+                            $(".subjectSelect").attr("checked", "checked");
+                            $(".subjectSelect").attr("disabled", "disabled");
+                        }
+                        @*$("#selects2").html(result);
+                        $(".subjectSelect").attr("checked", "checked");
+                        $(".subjectSelect").attr("disabled", "disabled");*@
+
+                    },
+                    error: function (jqXHR, status, err) {
+                        alert("Error");
+                    },
+                    complete: function (jqXHR, status) {
+                        //What to do here so only the #slctSubCats gets loaded?
+                    }
+                });
+
+            }
+            else {
+                alert("Please Select Course 1st");
+                $(this).val(0);
+            }
+        });
+
+        //#endregion
+
+
+        //#region _______________ 2. Select_Subject_by_Year / Course _______________
+        //___ get ___
+        @*$.ajax({
+            url: '/ProceedAdmission/SetSubjects/',
+            type: "Get",
+            success: function (result, status, jqXHR) {
+                $("#selects").html(result);
+            },
+            error: function (jqXHR, status, err) {
+                alert("Error");
+            },
+            complete: function (jqXHR, status) {
+                //What to do here so only the #slctSubCats gets loaded?
+            }
+        });*@
+        $("#selects").load('/ProceedAdmission/SetSubjects/');
+
+        @*$.ajax({
+            url: '/ProceedAdmission/SetOPSubjects/',
+            type: "Get",
+            success: function (result, status, jqXHR) {
+                $("#selects2").html(result);
+            },
+            error: function (jqXHR, status, err) {
+                alert("Error");
+            },
+            complete: function (jqXHR, status) {
+                //What to do here so only the #slctSubCats gets loaded?
+            }
+        });*@
+        $("#selects2").load('/ProceedAdmission/SetOPSubjects/');
+
+        //#endregion Select_Course_by_Year
+
+    </script>
+}
+
