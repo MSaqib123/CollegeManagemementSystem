@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace CMS.Controllers
 {
-    public class CoursesController : Controller
+    public class FacilityController : Controller
     {
         private readonly cms_06GContext context;
         private readonly IWebHostEnvironment iWebHost;
         private readonly UserManager<ApplicationUser> userManager;
-        public CoursesController(cms_06GContext context, IWebHostEnvironment iWebHost, UserManager<ApplicationUser> userManager)
+        public FacilityController(cms_06GContext context, IWebHostEnvironment iWebHost, UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
             this.context = context;
@@ -22,8 +22,9 @@ namespace CMS.Controllers
 
         public IActionResult Index()
         {
-            var list = context.TblCourse.ToList();
+            var list = context.TblFacilities.Include(x => x.Dep).ToList();
             return View(list);
         }
+
     }
 }

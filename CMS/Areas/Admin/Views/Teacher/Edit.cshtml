@@ -1,62 +1,104 @@
 ﻿@model TblFaculties
 
-<h4>TblFaculties</h4>
-<hr />
-<div class="row">
-    <div class="col-12">
-        <form asp-action="Edit" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-6">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input asp-for="FId" hidden/>
-                    
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DateofBirth" class="control-label"></label>
-                        <input asp-for="DateofBirth" class="form-control" />
-                        <span asp-validation-for="DateofBirth" class="text-danger"></span>
-                    </div>
-
-                    @*___________________ Age Detail me Show krni ha ______*@
-                    @*<div class="form-group">
-                        <label asp-for="AgebyDob" class="control-label"></label>
-                        <input asp-for="AgebyDob" class="form-control" />
-                        <span asp-validation-for="AgebyDob" class="text-danger"></span>
-                    </div>*@
-
-                    <div class="form-group">
-                        <label asp-for="DepId" class="control-label"></label>
-                        <select asp-for="DepId" asp-items="ViewBag.dep" class="form-control form-select">
-                            <option selected disabled>---- Select Departement ----</option>
-                        </select>
-                    </div>
-
-                    <input type="submit" value="Create" class="btn btn-primary w-100" />
-                </div>
-
-                @*image*@
-                <div class="col-6">
-                    <label class="control-label">Add Image</label>
-                    <input asp-for="BrowsImage" class="form-control" />
-                    <img src="~/@Model.FacImage" id="TeacherPreview" class="img-fluid" />
-                </div>
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-start align-content-center mt-2 mb-2">
+                <h4>Update Students</h4>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<br />
+<br />
+
+
+@*_______________ Form ______________*@
+<form asp-action="Edit" enctype="multipart/form-data">
+
+    <div class="row g-4">
+        @*_______________ Student Detail ______________*@
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+
+                @*_____________________ Hidden Status Hidden _____________*@
+                <input asp-for="FId" hidden />
+                <input asp-for="FacImage" hidden />
+
+
+                @*_____________________ Student Detail ____________________*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" type="text" class="form-control" id="floatingCourse"
+                           placeholder="Enter StudentName">
+                    <label for="floatingCourse">Student Name</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-floating mb-3">
+                    <input asp-for="DateofBirth" type="date" class="form-control" id="floatingCourse"
+                           placeholder="Enter FatherName">
+                    <label for="floatingCourse">Date Of Birth</label>
+                    <span asp-validation-for="DateofBirth" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-floating mb-3" style="width:100%">
+                    <select asp-for="DepId" asp-items="@ViewBag.dep" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>--- select ---</option>
+                    </select>
+                    <label for="floatingSelect">Status</label>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">BrowesImage</label>
+                    <input asp-for="BrowsImage" class="form-control bg-dark" type="file" id="formFile">
+                    <span asp-validation-for="DateofBirth" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+
+
+            </div>
+        </div>
+
+        @*_______________ Images ______________*@
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-secondary rounded h-100 p-4">
+                <div class="form-group">
+
+                    <div class="container mt-5 d-flex justify-content-center align-items-center align-content-center">
+                        @if (Model.FacImage != null)
+                        {
+                            <img src="~/@Model.FacImage" class="img-fluid" id="Preview" style="width:50%;height:80%" />
+                        }
+                        else
+                        {
+                            <img src="~/Template/img/no-image-icon-23492.png" class="img-fluid" id="facilityPreview" style="width:50%;height:80%" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+
+</form>
+
+
+
 
 <script>
-    var imgInp = document.getElementById("BrowsImage");
-    var preview = document.getElementById("TeacherPreview");
+
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("previoewImage");
 
     imgInp.onchange = evt => {
         const [file] = imgInp.files;

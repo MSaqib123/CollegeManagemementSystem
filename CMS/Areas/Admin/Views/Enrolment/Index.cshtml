@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TblEnrolement>
+﻿@model vmEnrolmentList
 
 @{
     ViewData["Title"] = "Index";
@@ -9,11 +9,8 @@
 <div class="row g-4" style="height:100px">
     <div class="col-sm-12">
         <div class="bg-secondary rounded h-100 p-4">
-            <div class="d-flex justify-content-between mt-2 mb-2">
-                <h4>Course</h4>
-                <div>
-                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
-                </div>
+            <div class="d-flex justify-content-center mt-2 mb-2">
+                <h4>Student Enrollments</h4>
             </div>
         </div>
     </div>
@@ -21,7 +18,6 @@
 
 <br />
 <br />
-
 
 <div class="row g-4">
     <div class="col-12">
@@ -32,55 +28,60 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>sdf</th>
                             <th>
-                                course
+                                Student
                             </th>
                             <th>
-                                Interducse Date
+                                CourseName
                             </th>
                             <th>
-                                
+                                Specializ Subject
                             </th>
-                            <th></th>
+                            <th>
+                                Optional Subject
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        @foreach (var item in Model.enrolment_list.ToList().Select((x, i) => new { Data = x, Index = i + 1 }))
                         {
-                            <tr>
+                            <tr scope="row">
                                 <td>
                                     @item.Index
-                                </td>
-                                <td>
-                                    @item.Data.EnrId
                                 </td>
                                 <td>
                                     @item.Data.Stu.StuName
                                 </td>
                                 <td>
-                                    @if (item.Data.Stu.Course != null)
+                                    <p>@item.Data.Specializesubject.tblSubjects.First().Course.Course</p>
+                                </td>
+                                <td>
+                                    @foreach (var item1 in Model.subject_sepecaliz_list.Where(x => x.SS_id == item.Data.SpecializesubjectId).ToList())
                                     {
-                                        @item.Data.Stu.Course.Course
+                                        <span>@item1.Subject &nbsp;</span>
                                     }
                                 </td>
                                 <td>
-                                    @item.Data.Specializesubject.SsName
+                                    @foreach (var item2 in Model.subject_optional_list.Where(x => x.YId == item.Data.Specializesubject.tblSubjects.First().YId).ToList())
+                                    {
+                                        <span>@item2.OptinalSubject</span>
+                                    }
                                 </td>
-                                <td>
-                                    @item.Data.Optionalsubject.OptinalSubject
-                                </td>
-                                @*<td>
-            <a asp-action="Edit" asp-route-id="@item.Data.CId" class="btn "><i class="fa fa-edit"></i></a> |
-            <a asp-action="delete" asp-route-id="@item.Data.CId" class="btn  " onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
-        </td>*@
+
+                                @*<td>*@
                             </tr>
                         }
                     </tbody>
                 </table>
 
+                
             </div>
         </div>
     </div>
 </div>
 
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

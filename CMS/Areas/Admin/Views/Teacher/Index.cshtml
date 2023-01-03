@@ -1,57 +1,93 @@
 ﻿@model IEnumerable<TblFaculties>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            @*<th>
-            @Html.DisplayNameFor(model => model.FId)
-        </th>*@
-            <th>
-                Name
-            </th>
-            <th>
-                Date of Birth
-            </th>
-            <th>
-                Age
-            </th>
-            <th>
-                Departement
-            </th>
-            <th>
-                Image
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FId">Details</a> |
-                <a asp-action="delete" asp-route-id="@item.FId" onclick="return confirm('Are sure wants to delete?');">Delete</a>
-            </td>            @*<td>
-            @Html.DisplayFor(modelItem => item.FId)
-        </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateofBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgebyDob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dep.Departement)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FacImage)
-            </td>
-        </tr>
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                <h4>Departements</h4>
+                <div>
+                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="row g-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Image
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Date of Birth
+                            </th>
+                            <th>
+                                Age
+                            </th>
+                            <th>
+                                Departement
+                            </th>
+                            <th>
+                                actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            <tr scope="row">
+
+                                <td>
+                                    <img src="~/@item.Data.FacImage" alt="Alternate Text" style="width:40px;height:40px"/>
+                                </td>
+                                <td>
+                                    @item.Index
+                                </td>
+                                <td>
+                                    @item.Data.Name
+                                </td>
+                                <td>
+                                    @item.Data.DateofBirth
+                                </td>
+                                <td>
+                                    @item.Data.AgebyDob
+                                </td>
+                                <td>
+                                    @item.Data.Dep.Departement
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Data.FId" class="btn "><i class="fa fa-edit"></i></a> |
+                                    <a asp-action="delete" asp-route-id="@item.Data.FId" class="btn  " onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
 }
-    </tbody>
-</table>

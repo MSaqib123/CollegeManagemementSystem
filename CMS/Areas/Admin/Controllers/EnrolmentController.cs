@@ -1,4 +1,5 @@
 ﻿using CMS.Data;
+using CMS.Data.ViewModel;
 using CMS.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -26,84 +27,15 @@ namespace CMS.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var list = context.TblEnrolement.Include(x=>x.Stu.Course).Include(x => x.Specializesubject).Include(x=>x.Optionalsubject).ToList();
-            return View(list);
+            var enrolemrntList = context.TblEnrolement.Include(x=>x.Stu).Include(x => x.Specializesubject).Include(x => x.Optionalsubject).ToList();
+
+            vmEnrolmentList stuEnrolment = new vmEnrolmentList();
+            stuEnrolment.enrolment_list = enrolemrntList;
+            stuEnrolment.subject_sepecaliz_list = context.TblSubjects.Include(x=>x.Course).ToList();
+            stuEnrolment.subject_optional_list = context.TblOptionalsubjects.ToList();
+
+            return View(stuEnrolment);
         }
-
-
-
-        public IActionResult Create()
-        {
-            var list = context.TblDepartement.ToList();
-            ViewBag.dep = new SelectList(list, "DepId", "Departement");
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create( TblCourse model)
-        {
-            //____________ Image _________
-            var folder = "";
-            if (model.BrowsImage != null)
-            {
-                folder = "Images/Teachers/";
-                folder += Guid.NewGuid().ToString() + "_" + model.BrowsImage.FileName;
-                var serverFolder = Path.Combine(iWebHost.WebRootPath, folder);
-                //model.BrowsImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
-                using (var fileMode = new FileStream(serverFolder, FileMode.Create))
-                {
-                    model.BrowsImage.CopyTo(fileMode/*new FileStream(serverFolder, FileMode.Create)*/);
-                }
-            }
-
-            model.coImage = folder;
-            
-            context.TblCourse.Add(model);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-
-
-        public IActionResult Edit(int id)
-        {
-            var list = context.TblDepartement.ToList();
-            ViewBag.dep = new SelectList(list, "DepId", "Departement");
-
-            var selectedRecord = context.TblCourse.Find(id);
-            return View(selectedRecord);
-        }
-        [HttpPost]
-        public IActionResult Edit(TblCourse model)
-        {
-            var folder = "";
-            if (model.BrowsImage != null)
-            {
-                //______ 1st Delete Current Image _____
-                if (model.coImage != null)
-                {
-                    var oldDirectory = Path.Combine(iWebHost.WebRootPath, model.coImage);
-                    if (System.IO.File.Exists(oldDirectory))
-                    {
-                        System.IO.File.Delete(oldDirectory);
-                    }
-                }
-
-                //______ 2nd Add new Image _______
-                folder = "Images/Departement/";
-                folder += Guid.NewGuid().ToString() + "_" + model.BrowsImage.FileName;
-                var serverFolder = Path.Combine(iWebHost.WebRootPath, folder);
-                //model.BrowsImage.CopyTo(new FileStream(serverFolder, FileMode.Create));
-                using (var fileMode = new FileStream(serverFolder, FileMode.Create))
-                {
-                    model.BrowsImage.CopyTo(fileMode/*new FileStream(serverFolder, FileMode.Create)*/);
-                }
-                model.coImage = folder;
-            }
-            context.TblCourse.Update(model);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
 
 
         public IActionResult delete(int id)
@@ -124,7 +56,6 @@ namespace CMS.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
-
 
 
     }
