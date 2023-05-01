@@ -1,14 +1,25 @@
 ﻿@model CMS.Models.TblStudent
 
 @{
-    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["Title"] = "Admission Form";
+    ViewData["BC_1"] = "Home";
+
+    ViewData["BC_2"] = "Admission Form";
+    ViewData["BC_2_Index"] = "Create";
+    ViewData["BC_2_Controller"] = "Admission";
+
+
+    ViewData["BC_3"] = "";
+    ViewData["BC_3_Index"] = "";
+    ViewData["BC_3_Controller"] = "";
+
 }
 
 
-
 <!-- Header Start -->
-<div class="container-fluid bg-primary py-5 mb-5 page-header">
+<!--<div class="container-fluid bg-primary py-5 mb-5 page-header">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center">
@@ -23,7 +34,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- Header End -->
 
 <div class="container-xxl py-5">

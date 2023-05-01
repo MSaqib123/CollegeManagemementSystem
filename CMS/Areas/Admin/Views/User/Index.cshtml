@@ -1,10 +1,5 @@
 ﻿@model IEnumerable<CMS.Models.ApplicationUser>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-
 
 <div class="row g-4" style="height:100px">
     <div class="col-sm-12">
@@ -67,7 +62,7 @@
                                     @Html.DisplayFor(modelItem => item.PasswordHash)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-name="@item.UserName" class="btn "><i class="fa fa-edit"></i></a> |
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn "><i class="fa fa-edit"></i></a> |
                                     <a asp-action="delete" asp-route-id="@item.Id" class="btn  " onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FirstProject.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly cms_06GContext context;
@@ -44,7 +44,7 @@ namespace FirstProject.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //_____ Check Email _________ (by Default hotaa ha Validate)
-                var checkUser = await identityUserManager.FindByEmailAsync(signUp.Email);
+                var checkUser = await identityUserManager.FindByNameAsync(signUp.Email);
                 if (checkUser == null)
                 {
                     ViewBag.email = "Match";
@@ -95,13 +95,13 @@ namespace FirstProject.Areas.Admin.Controllers
 
 
 
-        public async Task<IActionResult> Edit(string name)
+        public async Task<IActionResult> Edit(string id)
         {
-            var user = await identityUserManager.FindByNameAsync(name);
+            var user = await identityUserManager.FindByIdAsync(id);
 
             var appUser = new ApplicationUser
             {
-                Name = user.Name,
+                Name = user.Name.ToString(),
                 UserName = user.UserName,
                 Email = user.Email,
                 Country = user.Country,
@@ -113,7 +113,7 @@ namespace FirstProject.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ApplicationUser model)
         {
-            var updateUser = await identityUserManager.FindByNameAsync(model.UserName);
+            var updateUser = await identityUserManager.FindByIdAsync(model.Id);
 
             //____________ Image _________
             var folder = "";
@@ -168,9 +168,9 @@ namespace FirstProject.Areas.Admin.Controllers
             return View(model);
         }
 
-        public IActionResult delete(string userName)
+        public IActionResult delete(string id)
         {
-            var user = context.Users.Where(x=>x.UserName == userName).FirstOrDefault();
+            var user = context.Users.Where(x=>x.Id== id).FirstOrDefault();
             context.Users.Remove(user);
             context.SaveChanges();
             return RedirectToAction("Index");

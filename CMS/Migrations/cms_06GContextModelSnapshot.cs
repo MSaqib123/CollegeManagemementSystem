@@ -464,6 +464,38 @@ namespace CMS.Migrations
                     b.ToTable("tbl_previouseExameDetails");
                 });
 
+            modelBuilder.Entity("CMS.Models.TblSlider", b =>
+                {
+                    b.Property<int>("SId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Slider_Id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnName("SubTitle")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Title")
+                        .HasColumnName("Title")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("details")
+                        .HasColumnName("slider_detail")
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("sliderImage")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.HasKey("SId");
+
+                    b.ToTable("TblSlider");
+                });
+
             modelBuilder.Entity("CMS.Models.TblSpecializesubject", b =>
                 {
                     b.Property<int>("SsId")
@@ -521,10 +553,12 @@ namespace CMS.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("StuDateofBirth")
+                        .IsRequired()
                         .HasColumnName("stu_dateofBirth")
                         .HasColumnType("date");
 
                     b.Property<string>("StuFathername")
+                        .IsRequired()
                         .HasColumnName("stu_fathername")
                         .HasColumnType("varchar(30)")
                         .HasMaxLength(30)
@@ -543,6 +577,7 @@ namespace CMS.Migrations
                         .IsUnicode(false);
 
                     b.Property<string>("StuName")
+                        .IsRequired()
                         .HasColumnName("stu_name")
                         .HasColumnType("varchar(30)")
                         .HasMaxLength(30)

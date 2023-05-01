@@ -13,7 +13,7 @@ using System.Linq;
 namespace CMS.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class EnrolmentController : Controller
     {
         private readonly cms_06GContext context;

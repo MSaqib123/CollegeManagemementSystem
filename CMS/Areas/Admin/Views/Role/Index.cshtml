@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole> 
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row g-4" style="height:100px">
+    <div class="col-sm-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="d-flex justify-content-between mt-2 mb-2">
+                <h4>Roles</h4>
+                <div>
+                    <a asp-action="Create" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+
+<div class="row g-4">
+    <div class="col-12">
+        <div class="bg-secondary rounded h-100 p-4">
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Role Id</th>
+                            <th class="ps-5">Role Names</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                        {
+                            if (Model != null)
+                            {
+                                <tr>
+                                    <td>@item.Index</td>
+                                    <td width="20%">@item.Data.Id</td>
+                                    <td width="40%" class="ms-5 ps-5">@item.Data.Name</td>
+                                    <td>
+                                        <a asp-action="RoleAssign" asp-route-id="@item.Data.Id" class="btn "><i class="fa fa-tasks"></i></a> |
+                                        <a asp-action="Edit" asp-route-id="@item.Data.Id" class="btn "><i class="fa fa-edit"></i></a> |
+                                        <a asp-action="delete" asp-route-id="@item.Data.Id" class="btn" onclick="return confirm('Are sure wants to delete?');"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-center">No Roles</td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -38,6 +38,8 @@ namespace CMS
             services.ConfigureApplicationCookie(option =>
             {
                 option.LoginPath = "/Security/Account/SignIn/";
+                option.AccessDeniedPath = "/Security/Account/PageNotFound_404/";
+                //PageNotFound_404
             });
         }
 

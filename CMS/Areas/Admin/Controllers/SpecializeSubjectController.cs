@@ -10,7 +10,7 @@ using System.Linq;
 namespace CMS.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class SpecializeSubjectController : Controller
     {
 

@@ -70,7 +70,10 @@
                                     @item.Data.AgebyDob
                                 </td>
                                 <td>
-                                    @item.Data.Dep.Departement
+                                    @if (item.Data.Dep != null)
+                                    {
+                                        @item.Data.Dep.Departement
+                                    }
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Data.FId" class="btn "><i class="fa fa-edit"></i></a> |

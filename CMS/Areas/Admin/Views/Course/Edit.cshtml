@@ -79,7 +79,7 @@
                 <div class="container mt-3">
                     @if (Model.coImage != null)
                     {
-                        <img src="~/@Model.coImage" class="img-fluid" id="facilityPreview" />
+                        <img src="~/@Model.coImage" class="img-fluid" id="imgPreview" />
                     }
                 </div>
             </div>
@@ -103,9 +103,10 @@
 
 
 
+
 <script>
     var imgInp = document.getElementById("formFile");
-    var preview = document.getElementById("facilityPreview");
+    var preview = document.getElementById("imgPreview");
 
     imgInp.onchange = evt => {
         const [file] = imgInp.files;

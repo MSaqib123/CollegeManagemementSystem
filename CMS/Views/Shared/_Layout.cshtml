@@ -39,9 +39,15 @@
         input::-webkit-inner-spin-button {
             display: none;
         }
+        .page-header {
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+        }
     </style>
 </head>
 <body>
+
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -49,7 +55,8 @@
         </div>
     </div>
     <!-- Spinner End -->
-    <!-- Navbar Start -->
+
+    <!-- _________________ Navbar Start __________________________ -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>CMS</h2>
@@ -59,31 +66,49 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
 
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-item nav-link @Html.ActiveClass("Home", "Index")">Home</a>
+
+                @*<a asp-area="Security" asp-controller="Account" asp-action="SigInSignOut" asp-route-option="signIn" class="nav-item nav-link @Html.ActiveClass("Account", "SigInSignOut")">SignIn</a>
+                <a asp-area="Security" asp-controller="Account" asp-action="SigInSignOut" asp-route-option="signUp" class="nav-item nav-link @Html.ActiveClass("Account", "SigInSignOut")">SignUp</a>*@
+
+                @{
+                    var collegeCont = ViewContext.RouteData.Values["controller"].ToString();
+                    var collegeActive = "";
+                    if (collegeCont == "Departement" || collegeCont == "Courses" || collegeCont == "Facility" || collegeCont == "Teachers")
+                    {
+                        collegeActive = "active";
+                    }
+                }
                 <div class="nav-item dropdown">
-                    <a style="cursor:pointer" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">College</a>
+                    <a style="cursor:pointer" class="nav-link dropdown-toggle @(collegeActive)" data-bs-toggle="dropdown">College</a>
                     <div class="dropdown-menu fade-down m-0">
-                        <a asp-controller="Courses" asp-action="Index" class="dropdown-item">Courses</a>
-                        <a asp-controller="Facility" asp-action="Index" class="dropdown-item">Facilities</a>
-                        <a asp-controller="Teachers" asp-action="Index" class="dropdown-item">Teachers</a>
-                        <a asp-controller="Departement" asp-action="Index" class="dropdown-item">Departement</a>
-                        <a asp-controller="Home" asp-action="Index" class="dropdown-item">Teachers Departement Wise</a>
+                        <a asp-area="" asp-action="Index" asp-controller="Departement" class="dropdown-item @Html.ActiveClass("Departement", "Index")">Departement</a>
+                        <a asp-area="" asp-controller="Courses" asp-action="Index" class="dropdown-item @Html.ActiveClass("Courses", "Index")">Courses</a>
+                        <a asp-area="" asp-controller="Facility" asp-action="Index" class="dropdown-item @Html.ActiveClass("Facility", "Index")">Facilities</a>
+                        <a asp-area="" asp-controller="Teachers" asp-action="Index" class="dropdown-item @Html.ActiveClass("Teachers", "Index") ">Teachers</a>
                     </div>
                 </div>
 
+                @{
+                    var addCont = ViewContext.RouteData.Values["controller"].ToString();
+                    var addegeActive = "";
+                    if (addCont == "Admission" || addCont == "ProceedAdmission")
+                    {
+                        addegeActive = "active";
+                    }
+                }
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admission</a>
+                    <a href="#" class="nav-link dropdown-toggle @(addegeActive)" data-bs-toggle="dropdown">Admission</a>
                     <div class="dropdown-menu fade-down m-0">
-                        <a asp-controller="Admission" asp-action="Create" class="dropdown-item">Admission Form</a>
-                        <a asp-controller="ProceedAdmission" asp-action="Index" class="dropdown-item">Check Admission</a>
-                        @*<a href="404.html" class="dropdown-item">404 Page</a>*@
+                        <a asp-area="" asp-controller="Admission" asp-action="Create" class="dropdown-item @Html.ActiveClass("Admission", "Create")">Admission Form</a>
+                        <a asp-area="" asp-controller="ProceedAdmission" asp-action="Index" class="dropdown-item @Html.ActiveClass("ProceedAdmission", "Index") @Html.ActiveClass("ProceedAdmission","Update")">Check Admission</a>
                     </div>
                 </div>
 
-                <a asp-controller="AboutUs" asp-action="Index" class="nav-item nav-link">About Us</a>
-                <a asp-controller="ContactUs" asp-action="Index" class="nav-item nav-link">Contact Us</a>
-                <a asp-controller="Home" asp-action="pageNotFound" class="nav-item nav-link">404</a>
+                <a asp-area="" asp-controller="AboutUs" asp-action="Index" class="nav-item nav-link  @Html.ActiveClass("AboutUs", "Index")">About Us</a>
+                <a asp-area="" asp-controller="ContactUs" asp-action="Index" class="nav-item nav-link  @Html.ActiveClass("ContactUs", "Index")">Contact Us</a>
+                @*<a asp-controller="Home" asp-action="pageNotFound" class="nav-item nav-link">404</a>*@
             </div>
             @if (SignInManager.IsSignedIn(User)) //(false)
             {
@@ -102,8 +127,11 @@
                     <a href="~/Template/img/placeholder.png" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
                     <div class="dropdown-menu fade-down m-0">
                         <a href="#" class="dropdown-item">@user.Name</a>
-                        <a asp-controller="ProceedAdmission" asp-action="Index" class="dropdown-item">Profile</a>
-                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dropdown-item">Dashboard</a>
+                        <a asp-area="" asp-controller="ProceedAdmission" asp-action="Index" class="dropdown-item">Profile</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a  asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="dropdown-item">Dashboard</a>
+                        }
                     </div>
                 </div>
                 <a asp-area="Security" asp-controller="Account" asp-action="Logout" class="py-4 px-lg-3 d-none d-lg-block text-danger">Logout<i class="fa fa-arrow-right ms-3"></i></a>
@@ -119,9 +147,21 @@
     <!-- Navbar End -->
 
 
+
+    @{
+        var homeCont = ViewContext.RouteData.Values["controller"].ToString();
+
+        if (homeCont != "Home")
+        {
+            @await Component.InvokeAsync("image");
+        }
+    }
+
+
     @RenderBody()
 
 
+    <!-- _________________ Foooter Start __________________________ -->
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
@@ -203,6 +243,7 @@
         </div>
     </div>
     <!-- Footer End -->
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 

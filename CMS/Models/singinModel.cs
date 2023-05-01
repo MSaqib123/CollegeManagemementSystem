@@ -13,5 +13,8 @@ namespace CMS.Models
         //____ Login Rakhnaa ha yaa nhin _____ User ke  Choice ha kaa ===> Login Rkhaa yaa na ===> Required nhin lgain ga
         public bool isRemember { get; set; }
 
+
+        public string ReturnUrl { get; set; }
+
     }
 }

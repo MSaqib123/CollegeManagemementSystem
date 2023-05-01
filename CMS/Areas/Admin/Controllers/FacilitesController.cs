@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace CMS.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class FacilitesController : Controller
     {
         private readonly cms_06GContext context;

@@ -1,0 +1,78 @@
+﻿@model VMSingInSingUp
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - CSS Only Slide Login/Registration</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    @{
+        var option = ViewBag.option;
+    }
+    
+    <div id="container">
+        <!-- Cover Box -->
+        <div id="cover">
+            @if (option == "signIn")
+            {
+                <!-- Sign Up Section -->
+                <h1 class="sign-up">Hello, Friend!</h1>
+                <p class="sign-up">Enter your personal details<br> and start a journey with us</p>
+                <a class="button sign-up" href="#cover">Sign Up</a>
+
+                <!-- Sign In Section -->
+                <h1 class="sign-in">Welcome Back!</h1>
+                <p class="sign-in">To keep connected with us please<br> login with your personal info</p>
+                <br>
+                <a class="button sub sign-in" href="#">Sign In</a>
+            }
+            else
+            {
+                <!-- Sign In Section -->
+                <h1 class="sign-in">Hello, Friend!</h1>
+                <br>
+                <p class="sign-in">Enter your personal details<br> and start a journey with us</p>
+                <br>
+                <a class="button sub sign-in" href="#">Sign Up</a>
+
+                <!-- Sign Up Section -->
+                <h1 class="sign-up">Welcome Back!</h1>
+                <p class="sign-up">To keep connected with us please<br> login with your personal info</p>
+                <a class="button sign-up" href="#cover">Sign In</a>
+            }
+
+        </div>
+        @{
+            <form asp-action="SigInSignOut">
+                <!---------------------------- ____________  SingIn Box _____________ ---------------------->
+                @if (option == "signIn")
+                {
+                    <div id="login">
+                        <partial name="_SignIn" model="Model" />
+                    </div>
+                    <div id="register">
+                        <partial name="_SignUp" model="Model" />
+                    </div>
+                }
+                else
+                {
+                    <!---------------------------- ____________  SingUp Box _____________ ---------------------->
+                    <div id="register">
+                        <partial name="_SignIn" model="Model" />
+                    </div>
+                    <div id="login">
+                        <partial name="_SignUp" model="Model" />
+                    </div>
+                }
+            </form>
+        }
+
+
+
+
+    </div> <!-- END Container -->
+    <!-- partial -->
+</body>
+</html>

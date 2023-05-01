@@ -1,13 +1,22 @@
 ﻿@model CMS.Models.TblStudent
 
 
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Check Admission";
+    ViewData["BC_1"] = "Home";
+
+    ViewData["BC_2"] = "Check Admission";
+    ViewData["BC_2_Index"] = "Index";
+    ViewData["BC_2_Controller"] = "ProceedAdmission";
+
+    ViewData["BC_3"] = "";
+    ViewData["BC_3_Index"] = "";
+    ViewData["BC_3_Controller"] = "";
 }
 
+
 <!-- Header Start -->
-<div class="container-fluid bg-primary py-5 mb-5 page-header">
+<!--<div class="container-fluid bg-primary py-5 mb-5 page-header">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 text-center">
@@ -22,7 +31,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <!-- Header End -->
 
 
@@ -162,16 +171,16 @@
 
                 @*____________________________ Student Rejected ________________________________*@
                 @*@if (ViewBag.reject == "You succeseded to Registored check Your Portal...")
-                {
-                    <script>
-                        swal({
-                            title: "Your Form is Rejected?",
-                            text: "Resubmit Your Form",
-                            type: "error"
-                        })
-                    </script>
-                    
-                }*@
+                    {
+                        <script>
+                            swal({
+                                title: "Your Form is Rejected?",
+                                text: "Resubmit Your Form",
+                                type: "error"
+                            })
+                        </script>
+
+                    }*@
             </div>
         </div>
 

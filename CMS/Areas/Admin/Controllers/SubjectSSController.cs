@@ -10,7 +10,7 @@ using System.Linq;
 namespace CMS.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class SubjectSSController : Controller
     {
         private readonly cms_06GContext context;

@@ -40,6 +40,7 @@ namespace CMS.Data
         public virtual DbSet<TblTimetable> TblTimetable { get; set; }
         public virtual DbSet<TblYear> TblYear { get; set; }
         public virtual DbSet<TblFacilityImages> TblFacilityImages { get; set; }
+        public virtual DbSet<TblSlider> TblSlider { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

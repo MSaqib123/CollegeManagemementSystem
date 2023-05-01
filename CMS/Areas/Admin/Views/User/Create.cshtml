@@ -21,7 +21,7 @@
 <br />
 
 @*_______________ Form ______________*@
-<div class="row g-4" style="height:400px">
+<div class="row g-4">
     <div class="col-sm-12 col-xl-6">
         <div class="bg-secondary rounded h-100 p-4">
             <form asp-action="Create">
@@ -37,10 +37,23 @@
                     <label for="floatingEmail">Email</label>
                 </div>
 
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Country" type="text" class="form-control" id="floatingEmail" placeholder="Enter Country">
+                    <label for="floatingEmail">Country</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Select Main Image</label>
+                    <input asp-for="iImage" class="form-control bg-dark" type="file" id="formFile">
+                </div>
+
+
                 <div class="form-floating mb-3">
                     <input asp-for="Password" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
                     <label for="floatingPass">Password</label>
                 </div>
+
 
                 <div class="form-floating mb-3">
                     <input asp-for="ConPassword" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
@@ -59,9 +72,6 @@
     <div class="col-sm-12 col-xl-6">
         <div class="bg-secondary rounded h-100 p-4">
             <label class="control-label">User Image</label>
-
-            <input asp-for="iImage" />
-
             <div class="h-100 d-flex justify-content-center align-content-center align-items-center">
                 <img src="" class="preview" />
             </div>
@@ -83,3 +93,19 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("imgPreview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>

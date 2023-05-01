@@ -20,12 +20,12 @@
 
 @*_______________ Form ______________*@
 <form asp-action="Edit" enctype="multipart/form-data">
-    <div class="row g-4" style="height:400px">
+    <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
             <div class="bg-secondary rounded h-100 p-4">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="UserName" />
+                <input type="hidden" asp-for="Id" />
                 <input type="hidden" asp-for="ProfileImage" />
 
 
@@ -44,6 +44,11 @@
                     <label for="floatingEmail">Country</label>
                 </div>
 
+                <div class="mb-3">
+                    <input asp-for="iImage" class="form-control bg-dark" type="file" id="formFile">
+                </div>
+
+
                 <div class="form-floating mb-3">
                     <input asp-for="PasswordHash" type="text" class="form-control" id="floatingPass" placeholder="Enter Password">
                     <label for="floatingPass">Password</label>
@@ -57,13 +62,12 @@
 
         @*_______________ Images ______________*@
         <div class="col-sm-12 col-xl-6">
-            <div class="bg-secondary rounded h-100 p-4">
+            <div class="bg-secondary rounded h-100 p-3">
                 <label class="control-label">Change User Image</label>
-                <input asp-for="iImage" class="form-control" />
                 <div class="h-100 d-flex justify-content-center align-content-center align-items-center">
                     @if (Model.ProfileImage != null)
                     {
-                        <img src="~/@Model.ProfileImage" style="width:300px;height:230px"/>
+                        <img src="~/@Model.ProfileImage" style="width:300px;height:230px" id="imgPreview"/>
                     }
                     else
                     {
@@ -71,7 +75,7 @@
                     }
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 </form>
 
@@ -88,3 +92,17 @@
     </div>
 </div>
 
+
+
+<script>
+    var imgInp = document.getElementById("formFile");
+    var preview = document.getElementById("imgPreview");
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files;
+        if (file) {
+
+            preview.src = URL.createObjectURL(file)
+        }
+    }
+</script>

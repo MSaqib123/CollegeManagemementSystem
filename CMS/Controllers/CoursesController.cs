@@ -1,4 +1,5 @@
 ﻿using CMS.Data;
+using CMS.Data.ViewModel;
 using CMS.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +23,14 @@ namespace CMS.Controllers
 
         public IActionResult Index()
         {
-            var list = context.TblCourse.ToList();
-            return View(list);
+            //var list = context.TblCourse.Include(x=>x.TblStudent).ToList();
+            //return View(list);
+            VMHome vm = new VMHome();
+            vm.Course_List = context.TblCourse.Include(x => x.Dep).ToList();
+            vm.TblTeacher_List = context.TblFaculties.Include(x => x.Dep).ToList();
+            vm.tblStudent_List = context.TblStudent.Include(x=>x.Course).ToList();
+            return View(vm);
         }
+
     }
 }

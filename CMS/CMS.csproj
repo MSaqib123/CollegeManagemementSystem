@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\Departement\" />
     <Folder Include="wwwroot\Images\Course\" />
+    <Folder Include="wwwroot\Images\Slider\" />
     <Folder Include="wwwroot\Images\Students\" />
     <Folder Include="wwwroot\Images\Users\" />
   </ItemGroup>
@@ -130,6 +131,13 @@
     <None Include="wwwroot\TemplateFront\scss\bootstrap\scss\_type.scss" />
     <None Include="wwwroot\TemplateFront\scss\bootstrap\scss\_utilities.scss" />
     <None Include="wwwroot\TemplateFront\scss\bootstrap\scss\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Security\Views\Account\SigInSignOut.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
